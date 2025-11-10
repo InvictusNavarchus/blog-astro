@@ -6,17 +6,16 @@ A modern blog built with Astro.
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
-- pnpm
+- Bun (v1.0 or higher)
 
 ### Installation
 
 ```bash
 # Install dependencies
-pnpm install
+bun install
 
 # Start the development server
-pnpm run dev
+bun run dev
 ```
 
 The site will be available at `http://localhost:4321`.
@@ -62,11 +61,11 @@ Your content here...
 
 | Command              | Action                                   |
 | :------------------- | :--------------------------------------- |
-| `pnpm run dev`       | Start local dev server                   |
-| `pnpm run build`     | Build for production                     |
-| `pnpm run preview`   | Preview production build locally         |
-| `pnpm run format`    | Format code with Prettier                |
-| `pnpm run lint`      | Lint with ESLint                         |
+| `bun run dev`        | Start local dev server                   |
+| `bun run build`      | Build for production                     |
+| `bun run preview`    | Preview production build locally         |
+| `bun run format`     | Format code with Prettier                |
+| `bun run lint`       | Lint with ESLint                         |
 
 ## Tech Stack
 
