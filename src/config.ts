@@ -4,7 +4,7 @@ export const SITE = {
   profile: "https://farhandigital.id/",
   desc: "Eternal archive of my thoughts, experiences, and learnings on web development, programming, and technology.",
   title: "Farhan Digital | Blog",
-  ogImage: "og-image.jpg",
+  ogImage: "brand-logo.png",
   lightAndDarkMode: true,
   postPerIndex: 4,
   postPerPage: 4,
