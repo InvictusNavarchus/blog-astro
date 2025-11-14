@@ -9,6 +9,7 @@ import { fileURLToPath } from "url";
 const DEFAULT_AUTHOR = "Farhan";
 const DEFAULT_TAGS = [""];
 const DEFAULT_DRAFT = true;
+const DEFAULT_DESCRIPTION = "";
 // ========================
 
 const __filename = fileURLToPath(import.meta.url);
@@ -55,12 +56,7 @@ async function createNewPost() {
     process.exit(1);
   }
 
-  const description = await question("Description: ");
-  if (!description.trim()) {
-    console.error("❌ Description is required");
-    rl.close();
-    process.exit(1);
-  }
+  const description = DEFAULT_DESCRIPTION;
 
   // Auto-use defaults for optional fields
   const author_final = DEFAULT_AUTHOR;
