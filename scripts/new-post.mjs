@@ -62,29 +62,15 @@ async function createNewPost() {
     process.exit(1);
   }
 
-  const author = await question(
-    `Author (default: ${DEFAULT_AUTHOR}): `
-  );
-  const tagsInput = await question(
-    `Tags (comma-separated, default: ${DEFAULT_TAGS.join(", ")}): `
-  );
-  const draftInput = await question(
-    `Draft? (y/n, default: ${DEFAULT_DRAFT ? "y" : "n"}): `
-  );
+  // Auto-use defaults for optional fields
+  const author_final = DEFAULT_AUTHOR;
+  const tags = DEFAULT_TAGS;
+  const isDraft = DEFAULT_DRAFT;
+
   const customSlugInput = await question(
     "Custom slug (leave empty to auto-generate): "
   );
-
-  // Process inputs
   const slug = customSlugInput.trim() ? customSlugInput.trim() : slugify(title);
-  const author_final = author.trim() || DEFAULT_AUTHOR;
-  const tags = tagsInput.trim()
-    ? tagsInput
-        .split(",")
-        .map((t) => t.trim())
-        .filter((t) => t.length > 0)
-    : DEFAULT_TAGS;
-  const isDraft = draftInput.toLowerCase() === "y" ? true : DEFAULT_DRAFT;
   const now = new Date();
 
   // Check if file already exists
