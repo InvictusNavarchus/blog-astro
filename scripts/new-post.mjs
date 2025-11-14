@@ -66,11 +66,7 @@ async function createNewPost() {
   const author_final = DEFAULT_AUTHOR;
   const tags = DEFAULT_TAGS;
   const isDraft = DEFAULT_DRAFT;
-
-  const customSlugInput = await question(
-    "Custom slug (leave empty to auto-generate): "
-  );
-  const slug = customSlugInput.trim() ? customSlugInput.trim() : slugify(title);
+  const slug = slugify(title);
   const now = new Date();
 
   // Check if file already exists
