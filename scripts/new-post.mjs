@@ -5,6 +5,12 @@ import path from "path";
 import readline from "readline";
 import { fileURLToPath } from "url";
 
+// ===== CONFIGURATION =====
+const DEFAULT_AUTHOR = "Farhan";
+const DEFAULT_TAGS = [""];
+const DEFAULT_DRAFT = true;
+// ========================
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -56,21 +62,29 @@ async function createNewPost() {
     process.exit(1);
   }
 
-  const author = await question("Author (default: Farhan): ");
-  const tagsInput = await question("Tags (comma-separated, default: others): ");
-  const draftInput = await question("Draft? (y/n, default: n): ");
-  const customSlugInput = await question("Custom slug (leave empty to auto-generate): ");
+  const author = await question(
+    `Author (default: ${DEFAULT_AUTHOR}): `
+  );
+  const tagsInput = await question(
+    `Tags (comma-separated, default: ${DEFAULT_TAGS.join(", ")}): `
+  );
+  const draftInput = await question(
+    `Draft? (y/n, default: ${DEFAULT_DRAFT ? "y" : "n"}): `
+  );
+  const customSlugInput = await question(
+    "Custom slug (leave empty to auto-generate): "
+  );
 
   // Process inputs
   const slug = customSlugInput.trim() ? customSlugInput.trim() : slugify(title);
-  const author_final = author.trim() || "Farhan";
+  const author_final = author.trim() || DEFAULT_AUTHOR;
   const tags = tagsInput.trim()
     ? tagsInput
         .split(",")
         .map((t) => t.trim())
         .filter((t) => t.length > 0)
-    : ["others"];
-  const isDraft = draftInput.toLowerCase() === "y";
+    : DEFAULT_TAGS;
+  const isDraft = draftInput.toLowerCase() === "y" ? true : DEFAULT_DRAFT;
   const now = new Date();
 
   // Check if file already exists
