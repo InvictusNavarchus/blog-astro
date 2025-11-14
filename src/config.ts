@@ -1,9 +1,9 @@
 export const SITE = {
-  website: "https://example.com/", // replace this with your deployed domain
-  author: "Your Name",
-  profile: "https://example.com/",
-  desc: "A blog built with Astro.",
-  title: "My Blog",
+  website: "https://farhandigital.id/", // replace this with your deployed domain
+  author: "Farhan",
+  profile: "https://farhandigital.id/",
+  desc: "Eternal archive of my thoughts, experiences, and learnings on web development, programming, and technology.",
+  title: "Farhan Digital | Blog",
   ogImage: "og-image.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
@@ -12,7 +12,7 @@ export const SITE = {
   showArchives: true,
   showBackButton: true, // show back button in post detail
   editPost: {
-    enabled: true,
+    enabled: false,
     text: "Edit page",
     url: "https://github.com/yourname/your-blog/edit/main/",
   },
