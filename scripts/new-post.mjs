@@ -10,6 +10,7 @@ const DEFAULT_AUTHOR = "Farhan";
 const DEFAULT_TAGS = [""];
 const DEFAULT_DRAFT = true;
 const DEFAULT_DESCRIPTION = "";
+const DEFAULT_SLUG = ""; // Empty string means auto-generate from title
 // ========================
 
 const __filename = fileURLToPath(import.meta.url);
@@ -62,7 +63,7 @@ async function createNewPost() {
   const author_final = DEFAULT_AUTHOR;
   const tags = DEFAULT_TAGS;
   const isDraft = DEFAULT_DRAFT;
-  const slug = slugify(title);
+  const slug = DEFAULT_SLUG ? DEFAULT_SLUG : slugify(title);
   const now = new Date();
 
   // Check if file already exists
