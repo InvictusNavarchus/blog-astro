@@ -24,7 +24,7 @@ const {
   author = SITE.author,
   profile = SITE.profile,
   description = SITE.desc,
-  ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
+  ogImage = SITE.ogImage ? withBase(`/${SITE.ogImage}`) : withBase("/og.png"),
   canonicalURL = new URL(Astro.url.pathname, Astro.url),
   pubDatetime,
   modDatetime,
@@ -133,7 +133,7 @@ const structuredData = {
 
     <ClientRouter />
 
-    <script is:inline src="/toggle-theme.js"></script>
+    <script is:inline src={withBase("/toggle-theme.js")}></script>
   </head>
   <body>
     <slot />
