@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 
 // ===== CONFIGURATION =====
 const DEFAULT_AUTHOR = "Farhan";
-const DEFAULT_TAGS = [""];
+const DEFAULT_TAGS = "";
 const DEFAULT_DRAFT = true;
 const DEFAULT_DESCRIPTION = "";
 const DEFAULT_SLUG = ""; // Empty string means auto-generate from title
@@ -84,8 +84,7 @@ title: "${title}"
 slug: "${slug}"
 description: "${description}"
 draft: ${isDraft}
-tags:
-${tags.map((t) => `  - ${t}`).join("\n")}
+tags: ${`[${tags}]`}
 ---
 
 <!-- Write your post content here -->
