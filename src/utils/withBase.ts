@@ -6,8 +6,8 @@
 export function withBase(path: string): string {
   const base = "/blog";
   
-  // If path already starts with /blog/, return it as is
-  if (path.startsWith(base)) {
+  // If path already starts with /blog/ (exact prefix match), return it as is
+  if (path.startsWith(`${base}/`) || path === base) {
     return path;
   }
   
