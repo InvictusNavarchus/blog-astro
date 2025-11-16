@@ -13,10 +13,24 @@ export async function getStaticPaths() {
     p.filter(({ data }) => !data.draft && !data.ogImage)
   );
 
-  return posts.map(post => ({
-    params: { slug: getPath(post.id, post.filePath, false) },
-    props: post,
-  }));
+  return posts.map(post => {
+    // Get the path segments from filePath, excluding the collection folder and filename
+    const pathSegments = post.filePath
+      ?.replace("src/data/blog/", "")
+      .split("/")
+      .filter(path => path !== "")
+      .slice(0, -1) // remove filename
+      .map(segment => segment.toLowerCase().replace(/\s+/g, "-")) || [];
+    
+    // For dynamic routes, we just need the slug (post.id), not the full /blog/slug path
+    const slug = post.id.split("/").slice(-1)[0];
+    const routeSlug = pathSegments.length > 0 ? [...pathSegments, slug].join("/") : slug;
+    
+    return {
+      params: { slug: routeSlug },
+      props: post,
+    };
+  });
 }
 
 export const GET: APIRoute = async ({ props }) => {
