@@ -22,12 +22,14 @@ export async function getStaticPaths() {
       .slice(0, -1) // remove filename
       .map(segment => segment.toLowerCase().replace(/\s+/g, "-")) || [];
     
-    // For dynamic routes, we just need the slug (post.id), not the full /blog/slug path
+    // For catch-all [...slug] routes in Astro, the slug param must be a string representing
+    // the full path. Astro internally splits this on "/" boundaries to match the route.
+    // We construct this by joining all segments with "/" to create the path string.
     const slug = post.id.split("/").slice(-1)[0];
-    const routeSlug = pathSegments.length > 0 ? [...pathSegments, slug].join("/") : slug;
+    const slugPath = pathSegments.length > 0 ? [...pathSegments, slug].join("/") : slug;
     
     return {
-      params: { slug: routeSlug },
+      params: { slug: slugPath },
       props: post,
     };
   });
