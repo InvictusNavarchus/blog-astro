@@ -2,8 +2,7 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import PostDetails from "@/layouts/PostDetails.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
-import { slugifyStr } from "@/utils/slugify";
-import { BLOG_PATH } from "@/content.config";
+import { getSlugPathForPost } from "@/utils/getSlugPathForPost";
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -12,20 +11,7 @@ export interface Props {
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
   const postResult = posts.map(post => {
-    // Get the path segments from filePath, excluding the collection folder and filename
-    const pathSegments = post.filePath
-      ?.replace(BLOG_PATH, "")
-      .split("/")
-      .filter(path => path !== "")
-      .filter(path => !path.startsWith("_"))
-      .slice(0, -1) // remove filename
-      .map(segment => slugifyStr(segment)) || [];
-    
-    // For catch-all [...slug] routes in Astro, the slug param must be a string representing
-    // the full path. Astro internally splits this on "/" boundaries to match the route.
-    // We construct this by joining all segments with "/" to create the path string.
-    const slug = post.id.split("/").slice(-1)[0];
-    const slugPath = pathSegments.length > 0 ? [...pathSegments, slug].join("/") : slug;
+    const slugPath = getSlugPathForPost(post);
     
     return {
       params: { slug: slugPath },
