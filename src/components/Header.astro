@@ -12,19 +12,16 @@ import { withBase } from "@/utils/withBase";
 
 const { pathname } = Astro.url;
 
-// Remove the base from pathname for comparison
-const base = import.meta.env.BASE_URL || "/";
-const normalizedPathname = base === "/" ? pathname : pathname.replace(new RegExp(`^${base}`), "") || "/";
-
 // Remove trailing slash from current pathname if exists
 const currentPath =
-  normalizedPathname.endsWith("/") && normalizedPathname !== "/" ? normalizedPathname.slice(0, -1) : normalizedPathname;
+  pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
 
 const isActive = (path: string) => {
+  const basePath = withBase(path);
   const currentPathArray = currentPath.split("/").filter(p => p.trim());
-  const pathArray = path.split("/").filter(p => p.trim());
+  const pathArray = basePath.split("/").filter(p => p.trim());
 
-  return currentPath === path || currentPathArray[0] === pathArray[0];
+  return currentPath === basePath || currentPathArray[0] === pathArray[0];
 };
 ---
 
