@@ -58,7 +58,7 @@ function fixPathsInFile(filePath) {
     const original = content;
 
     // Fix _astro paths: /_astro/ → /blog/_astro/
-    content = content.replace(/\/_astro\//g, "/blog/_astro/");
+    content = content.replace(/(['"])(\/_astro\/[^'"]*)/g, '$1/blog$2');
 
     // Fix pagefind paths: /pagefind → /blog/pagefind
     content = content.replace(/\/pagefind\//g, "/blog/pagefind/");
