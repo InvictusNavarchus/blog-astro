@@ -18,10 +18,19 @@ const currentPath =
 
 const isActive = (path: string) => {
   const basePath = withBase(path);
-  const currentPathArray = currentPath.split("/").filter(p => p.trim());
-  const pathArray = basePath.split("/").filter(p => p.trim());
-
-  return currentPath === basePath || currentPathArray[0] === pathArray[0];
+  
+  // Exact match
+  if (currentPath === basePath) return true;
+  
+  // Check if currentPath starts with basePath as a full segment prefix
+  const currentSegments = currentPath.split("/").filter(p => p.trim());
+  const pathSegments = basePath.split("/").filter(p => p.trim());
+  
+  // currentPath must have at least as many segments as basePath
+  if (currentSegments.length < pathSegments.length) return false;
+  
+  // Every segment in pathSegments must match the corresponding segment in currentSegments
+  return pathSegments.every((segment, index) => currentSegments[index] === segment);
 };
 ---
 
