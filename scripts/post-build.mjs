@@ -64,8 +64,8 @@ function fixPathsInFile(filePath) {
     content = content.replace(/\/pagefind\//g, "/blog/pagefind/");
 
     // Fix og.png: /og.png → /blog/og.png (but not /blog/og.png already)
-    content = content.replace(/href="\/og\.png"/g, 'href="/blog/og.png"');
-    content = content.replace(/content="\/og\.png"/g, 'content="/blog/og.png"');
+    content = content.replace(/href=(["'])\/og\.png\1/g, 'href=$1/blog/og.png$1');
+    content = content.replace(/content=(["'])\/og\.png\1/g, 'content=$1/blog/og.png$1');
 
     if (content !== original) {
       fs.writeFileSync(filePath, content);
